@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 
-# ── Configuração visual ──────────────────────────────────────────────────────
+# Configuração visual
 plt.rcParams.update({
     "figure.facecolor": "white",
     "axes.facecolor": "#f8f8f8",
@@ -24,7 +24,7 @@ CORES = {
     "4D": "#F4A261",   # laranja
 }
 
-# ── Carrega o dataset limpo ──────────────────────────────────────────────────
+# dataset limpo
 df = pd.read_csv("data/fipezap_limpo.csv", parse_dates=["data"])
 
 # Filtra apenas São Paulo para análises detalhadas
@@ -36,7 +36,7 @@ sp_completo = sp.dropna(subset=["preco_1d", "preco_2d", "preco_3d", "preco_4d"])
 print(f"São Paulo: {len(sp_completo)} meses com dados completos por dormitório")
 print(f"Período: {sp_completo['data'].min().strftime('%b/%Y')} → {sp_completo['data'].max().strftime('%b/%Y')}\n")
 
-# ── Gráfico 1 ────────────────────────────────────────────────────────────────
+# Gráfico 1
 # Evolução do preço médio por m² em SP por número de dormitórios
 fig, ax = plt.subplots(figsize=(12, 5))
 
@@ -61,7 +61,7 @@ plt.savefig("data/grafico1_evolucao_sp.png", dpi=150, bbox_inches="tight")
 plt.close()
 print("Gráfico 1 salvo.")
 
-# ── Gráfico 2 ────────────────────────────────────────────────────────────────
+# Gráfico 2
 # Diferença percentual do preço/m² de 1D em relação a 2D (base)
 sp_completo = sp_completo.copy()
 sp_completo["premium_1d_vs_2d"] = (sp_completo["preco_1d"] / sp_completo["preco_2d"] - 1) * 100
@@ -86,7 +86,7 @@ plt.savefig("data/grafico2_premium_sp.png", dpi=150, bbox_inches="tight")
 plt.close()
 print("Gráfico 2 salvo.")
 
-# ── Gráfico 3 ────────────────────────────────────────────────────────────────
+# Gráfico 3
 # Comparativo entre capitais: preço/m² de 1D vs 4D no último mês disponível
 ultimo_mes = df["data"].max()
 df_recente = df[df["data"] == ultimo_mes].dropna(subset=["preco_1d", "preco_4d"])
@@ -114,7 +114,7 @@ plt.savefig("data/grafico3_capitais_razao.png", dpi=150, bbox_inches="tight")
 plt.close()
 print("Gráfico 3 salvo.")
 
-# ── Gráfico 4 ────────────────────────────────────────────────────────────────
+# Gráfico 4
 # Valorização acumulada desde 2019 por tipologia — São Paulo
 sp_2019 = sp_completo[sp_completo["data"] >= "2019-01-01"].copy()
 base = sp_2019[sp_2019["data"] == sp_2019["data"].min()].iloc[0]
