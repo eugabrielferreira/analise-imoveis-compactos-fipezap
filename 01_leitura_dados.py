@@ -12,7 +12,7 @@ CAPITAIS = [
 def ler_aba(arquivo, cidade):
     df = pd.read_excel(arquivo, sheet_name=cidade, header=None)
 
-    # O arquivo tem 56 colunas. Pegamos só as que interessam:
+    # O arquivo tem 56 colunas. Pegando apenas as que interessam:
     # col 1  = Data
     # col 2-6  = Número-Índice de venda (Total, 1D, 2D, 3D, 4D)
     # col 7-11 = Var. mensal % de venda (Total, 1D, 2D, 3D, 4D)
